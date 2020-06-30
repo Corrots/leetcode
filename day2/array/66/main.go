@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 /**
@@ -20,19 +19,18 @@ func main() {
 	fmt.Println(plusOne(nums1))
 	fmt.Println(plusOne(nums2))
 	fmt.Println(plusOne(nums3))
-	// true true false
 }
 
 func plusOne(digits []int) []int {
 	n := len(digits) - 1
-	var d int
-	for k, v := range digits {
-		d += v * int(math.Pow10(n-k))
+	for i := n; i >= 0; i-- {
+		if digits[i] != 9 {
+			digits[i]++
+			return digits
+		}
+		digits[i] = 0
 	}
-	//fmt.Println(d + 1)
-	var s []int
-	for _, v := range string(d + 1) {
-		s = append(s, int(v))
-	}
-	return s
+	var newDigits = []int{1}
+	digits = append(newDigits, digits...)
+	return digits
 }
