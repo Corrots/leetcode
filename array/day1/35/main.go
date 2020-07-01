@@ -24,3 +24,33 @@ func searchInsert(nums []int, target int) int {
 	}
 	return len(nums)
 }
+
+/**
+// 第一次写的弱鸡解法
+func searchInsert(nums []int, target int) int {
+	count := len(nums)
+	center := int(math.Ceil(float64(count / 2)))
+
+	var index int
+	if target >= nums[center] {
+		// 搜索后半部分
+		for i := center; i < count; i++ {
+			if target <= nums[i] {
+				index = i
+				break
+			}
+			index = i + 1
+		}
+	} else {
+		// 搜索前半部分
+		for i := 0; i < center; i++ {
+			if target <= nums[i] {
+				index = i
+				break
+			}
+			index = i + 1
+		}
+	}
+	return index
+}
+*/
