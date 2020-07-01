@@ -11,9 +11,19 @@ import "fmt"
 */
 func main() {
 	nums := []int{3, 2, 2, 3}
+	nums1 := []int{0, 1, 2, 2, 3, 0, 4, 2}
 	fmt.Println(removeElement(nums, 3))
+	fmt.Println(removeElement(nums1, 2))
 }
 
+// 快慢指针
 func removeElement(nums []int, val int) int {
-
+	i := 0
+	for _, v := range nums {
+		if v != val {
+			nums[i] = v
+			i++
+		}
+	}
+	return i
 }
