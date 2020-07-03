@@ -32,7 +32,7 @@ func twoSum(numbers []int, target int) []int {
 }
 */
 
-// 双指针解法 (8ms) O(n)
+// 双指针解法 (4ms) O(n)
 func twoSum(numbers []int, target int) []int {
 	p, q := 0, len(numbers)-1
 	for p < q {
