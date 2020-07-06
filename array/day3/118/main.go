@@ -14,18 +14,14 @@ func main() {
 
 func generate(numRows int) [][]int {
 	var res [][]int
-	if numRows == 0 {
-		return res
-	}
 	res = append(res, []int{1})
-	for i := 1; i < numRows; i++ {
-		// 在每个row的头部加入元素0
-		m := []int{0}
-		m = append(m, res[i-1]...)
-		for j := 0; j < len(m)-1; j++ {
-			m[j] = m[j] + m[j+1]
+	for i := 1; i < numRows-1; i++ {
+		line := []int{0}
+		line = append(line, res[i-1]...)
+		for j := 0; j < len(line)-1; j++ {
+			line[j] = line[j] + line[j+1]
 		}
-		res = append(res, m)
+		res = append(res, line)
 	}
 	return res
 }

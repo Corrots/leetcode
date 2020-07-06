@@ -8,6 +8,7 @@ import "fmt"
 斐波那契数，通常用 F(n) 表示，形成的序列称为斐波那契数列。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。
 */
 func main() {
+	fmt.Println(fib(1))
 	fmt.Println(fib(2))
 	fmt.Println(fib(3))
 	fmt.Println(fib(4))
@@ -17,8 +18,8 @@ func main() {
 }
 
 func fib(N int) int {
-	if N == 0 {
-		return 0
+	if N <= 1 {
+		return N
 	}
 	var res []int
 	fn := getFib()
