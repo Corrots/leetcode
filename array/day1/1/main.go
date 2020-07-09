@@ -35,14 +35,14 @@ func twoSum(nums []int, target int) []int {
 */
 
 /**
-2. 一遍哈希表
+2. 使用哈希表，通过一次遍历解决
 */
 func twoSum(nums []int, target int) []int {
 	m := make(map[int]int)
 	for k, v := range nums {
-		minus := target - v
-		if index, ok := m[minus]; ok {
-			return []int{k, index}
+		leave := target - v
+		if i, ok := m[leave]; ok {
+			return []int{k, i}
 		}
 		m[v] = k
 	}

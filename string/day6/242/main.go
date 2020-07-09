@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 /**
@@ -18,18 +17,22 @@ func main() {
 }
 
 func isAnagram(s string, t string) bool {
-	return sorting(s) == sorting(t)
-}
-
-func sorting(s string) string {
-	s1 := strings.Split(s, "")
-	for i := 1; i < len(s1); i++ {
-		e := s1[i]
-		j := 0
-		for j = i; j > 0 && s1[j-1] > e; j-- {
-			s1[j] = s1[j-1]
-		}
-		s1[j] = e
+	if len(s) != len(t) {
+		return false
 	}
-	return strings.Join(s1, "")
+	var counter [26]int
+	for _, v := range s {
+		counter[v-'a']++
+	}
+
+	for _, v := range t {
+		counter[v-'a']--
+	}
+
+	for _, v := range counter {
+		if v != 0 {
+			return false
+		}
+	}
+	return true
 }
