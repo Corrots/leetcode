@@ -15,22 +15,7 @@ func main() {
 	nums3 := make([]int, 100000)
 	copy(nums3, nums2)
 	MergeSort(nums2)
-	InsertionSort(nums3)
 	//fmt.Println(nums2)
-}
-
-func InsertionSort(nums []int) {
-	n := len(nums)
-	start := time.Now()
-	for i := 1; i < n; i++ {
-		e := nums[i]
-		j := 0
-		for j := i; j > 0 && nums[j-1] > e; j-- {
-			nums[j] = nums[j-1]
-		}
-		nums[j] = e
-	}
-	fmt.Printf("Insertion sort: %d ms\n", time.Since(start).Milliseconds())
 }
 
 func MergeSort(nums []int) {

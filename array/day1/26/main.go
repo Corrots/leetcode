@@ -17,7 +17,8 @@ func main() {
 
 /**
 双指针解法(快慢指针)
-排序数组中重复项一定是相邻的
+- 排序数组中重复项一定是相邻的
+- 将不重复的元素移动至数组的左侧
 */
 func removeDuplicates(nums []int) int {
 	p, q := 0, 1
