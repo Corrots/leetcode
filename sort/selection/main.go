@@ -3,15 +3,16 @@ package main
 import (
 	"fmt"
 	"time"
+
+	"github.com/corrots/leetcode/sort/helper"
 )
 
 func main() {
 	nums1 := []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
 	SelectionSort(nums1)
 	fmt.Println(nums1)
-	//nums2 := helper.GenerateRandomData(100000, 0, 1000000)
-	//SelectionSort(nums2)
-	//fmt.Println(nums2)
+	nums2 := helper.GenerateRandomData(100000, 0, 1000000)
+	SelectionSort(nums2)
 }
 
 // 选择排序
