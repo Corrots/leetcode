@@ -8,16 +8,27 @@ import (
 )
 
 func main() {
-	//nums1 := []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
-	//MergeSort(nums1)
-	//fmt.Println(nums1)
+	nums1 := []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
+	MergeSort(nums1)
+	fmt.Println(nums1)
 	nums2 := helper.GenerateRandomData(100000, 0, 1000000)
 	nums3 := make([]int, 100000)
 	copy(nums3, nums2)
 	MergeSort(nums2)
-	//fmt.Println(nums2)
 }
 
+func InsertionSort(nums []int, l, r int) {
+	for i := l + 1; i <= r; i++ {
+		e := nums[i]
+		j := 0
+		for j = i; j > l && nums[j-1] > e; j-- {
+			nums[j] = nums[j-1]
+		}
+		nums[j] = e
+	}
+}
+
+// 自顶向下
 func MergeSort(nums []int) {
 	n := len(nums)
 	start := time.Now()
@@ -27,14 +38,16 @@ func MergeSort(nums []int) {
 
 // 递归使用归并排序对nums[l:r]范围的元素进行排序
 func mergeSort(nums []int, l, r int) {
-	if l >= r {
+	if r-l <= 15 {
+		InsertionSort(nums, l, r)
 		return
 	}
-	// 考虑int溢出问题
 	mid := (l + r) / 2
 	mergeSort(nums, l, mid)
 	mergeSort(nums, mid+1, r)
-	merge(nums, l, mid, r)
+	if nums[mid] > nums[mid+1] {
+		merge(nums, l, mid, r)
+	}
 }
 
 // 将nums[l:mid]和nums[mid+1:r]进行归并
