@@ -15,6 +15,7 @@ func main() {
 	SelectionSort(nums2)
 }
 
+// []int{8, 6, 2, 3, 1, 5, 7, 4}
 // 选择排序
 func SelectionSort(nums []int) {
 	n := len(nums)
