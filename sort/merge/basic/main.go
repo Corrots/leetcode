@@ -12,21 +12,10 @@ func main() {
 	nums1 := []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
 	MergeSort(nums1)
 	fmt.Println(nums1)
-	nums2 := helper.GenerateRandomData(100000, 0, 1000000)
+	nums2 := helper.GenerateRandomData(1000000, 0, 10000000)
 	//nums3 := make([]int, 100000)
 	//copy(nums3, nums2)
 	MergeSort(nums2)
-}
-
-func InsertionSort(nums []int, l, r int) {
-	for i := l + 1; i <= r; i++ {
-		e := nums[i]
-		j := 0
-		for j = i; j > l && nums[j-1] > e; j-- {
-			nums[j] = nums[j-1]
-		}
-		nums[j] = e
-	}
 }
 
 func MergeSort(nums []int) {
@@ -42,7 +31,7 @@ func mergeSort(nums []int, l, r int) {
 	//	return
 	//}
 	if r-l <= 15 {
-		InsertionSort(nums, l, r)
+		helper.InsertionSort(nums, l, r)
 		return
 	}
 	mid := (l + r) / 2
