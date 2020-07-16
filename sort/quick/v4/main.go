@@ -19,6 +19,10 @@ func main() {
 	QuickSort3Ways(nums2)
 	nums4 := helper.GenerateRandomData(1000000, 0, 10)
 	QuickSort3Ways(nums4)
+
+	nums := helper.GenerateRandomData(100, 0, 1000)
+	QuickSort3Ways(nums)
+	fmt.Println(nums)
 }
 func QuickSort3Ways(nums []int) {
 	start := time.Now()
@@ -46,17 +50,19 @@ func partition(nums []int, l, r int) (int, int) {
 	nums[l], nums[random] = nums[random], nums[l]
 	v := nums[l]
 	// 初始化lt, gt
-	// 确保 nums[l+1,lt],nums[gt:r], nums[lt+1:i)都为空
+	// 确保初始时nums[l+1,lt],nums[gt:r], nums[lt+1:i)都为空
 	lt, gt := l, r+1
-	for i := l + 1; i <= r; i++ {
-		if i >= gt {
-			break
-		} else if nums[i] < v {
+	i := l + 1
+	for i < gt {
+		if nums[i] < v {
 			nums[i], nums[lt+1] = nums[lt+1], nums[i]
 			lt++
+			i++
 		} else if nums[i] > v {
 			nums[i], nums[gt-1] = nums[gt-1], nums[i]
 			gt--
+		} else {
+			i++
 		}
 	}
 	nums[l], nums[lt] = nums[lt], nums[l]
