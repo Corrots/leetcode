@@ -17,9 +17,12 @@ func main() {
 	//	//maxHeap.Insert(rand.Int() % 100)
 	//	maxHeap.Insert(v)
 	//}
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 20; i++ {
 		maxHeap.Insert(rand.Int() % 100)
 	}
 	maxHeap.Insert(52)
 	fmt.Println(maxHeap)
+	for !maxHeap.IsEmpty() {
+		fmt.Printf("%d ", maxHeap.ExtractMax())
+	}
 }
