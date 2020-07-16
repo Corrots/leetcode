@@ -42,12 +42,12 @@ func quickSort3Ways(nums []int, l, r int) {
 // 返回值lt，左侧为<v的元素
 // 返回值gt，右侧为>v的元素
 func partition(nums []int, l, r int) (int, int) {
-	// 随机设置基点元素v的值
 	random := rand.Int()%(r-l+1) + l
 	nums[l], nums[random] = nums[random], nums[l]
 	v := nums[l]
-	// nums[l+1,i) <= v; nums(j:r] >= v
-	lt, gt := l+1, r
+	// 初始化lt, gt
+	// 确保 nums[l+1,lt],nums[gt:r], nums[lt+1:i)都为空
+	lt, gt := l, r+1
 	for i := l + 1; i <= r; i++ {
 		if i >= gt {
 			break
