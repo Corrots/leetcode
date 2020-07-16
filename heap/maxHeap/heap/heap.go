@@ -16,6 +16,15 @@ func New(capacity int) *Heap {
 	}
 }
 
+func (h *Heap) String() string {
+	res := "["
+	for i := 1; i <= h.count; i++ {
+		res += fmt.Sprintf("%d ", h.data[i])
+	}
+	res += "]"
+	return res
+}
+
 func (h *Heap) Len() int {
 	return h.count
 }
@@ -41,11 +50,35 @@ func (h *Heap) shiftUp(k int) {
 	}
 }
 
-func (h *Heap) String() string {
-	res := "["
-	for i := 1; i <= h.count; i++ {
-		res += fmt.Sprintf("%d ", h.data[i])
+// 推出堆中最大值
+func (h *Heap) ExtractMax() int {
+	if h.count == 0 {
+		return 0
 	}
-	res += "]"
-	return res
+	max := h.data[1]
+	// 将根节点元素与最后元素交换位置
+	h.data[1] = h.data[h.count]
+	h.count--
+	// 调整第一个元素在堆中的位置
+	h.shiftDown(1)
+	return max
+}
+
+func (h *Heap) shiftDown(k int) {
+	// 只要有子树就一直遍历下去
+	for 2*k <= h.count {
+		// 此轮循环h.data[k]和h.data[j]互换位置
+		j := 2 * k
+		// 如果右子树存在，且右子树>左子树，变更为右子树
+		if j+1 <= h.count && h.data[j+1] > h.data[j] {
+			j += 1
+		}
+		// 循环终止条件
+		if h.data[k] >= h.data[j] {
+			break
+		}
+		// 父节点与子树的元素互换位置
+		h.data[k], h.data[j] = h.data[j], h.data[k]
+		k = j
+	}
 }
