@@ -44,7 +44,7 @@ func partition(nums []int, l, r int) (p int) {
 		}
 	}
 	// 此时 nums[l+1:j]<v; nums[j+1:i) > v
-	// 把l和j位置的元素互换位置，整个[l:r]就完成有序了
+	// 把l和j位置的元素互换位置，j左侧的元素都是<v的，右侧的都是>v的
 	nums[l], nums[j] = nums[j], nums[l]
 	return j
 }

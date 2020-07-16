@@ -9,6 +9,7 @@ import (
 )
 
 // 优化对于近乎有序数组的排序
+// 通过随机选择基点元素v解决
 func main() {
 	nums1 := []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
 	QuickSort(nums1)

@@ -43,6 +43,7 @@ func quickSort(nums []int, l, r int) {
 
 // 返回值p使 nums[l:p-1] < nums[p] < nums[p+1: r]
 func partition(nums []int, l, r int) (p int) {
+	// 随机设置基点元素v的值
 	random := rand.Int()%(r-l+1) + l
 	nums[l], nums[random] = nums[random], nums[l]
 	v := nums[l]
@@ -62,6 +63,6 @@ func partition(nums []int, l, r int) (p int) {
 		i++
 		j--
 	}
-	nums[l], nums[j] = nums[j], nums[l]
+	nums[l], nums[i-1] = nums[i-1], nums[l]
 	return j
 }
