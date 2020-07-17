@@ -16,6 +16,20 @@ func New(capacity int) *Heap {
 	}
 }
 
+func Heapify(nums []int, n int) *Heap {
+	var maxHeap Heap
+	maxHeap.data = make([]int, n+1)
+	maxHeap.capacity = n
+	for i := 0; i < n; i++ {
+		maxHeap.data[i+1] = nums[i]
+	}
+	maxHeap.count = n
+	for i := maxHeap.count / 2; i >= 1; i-- {
+		maxHeap.shiftDown(i)
+	}
+	return &maxHeap
+}
+
 func (h *Heap) String() string {
 	res := "["
 	for i := 1; i <= h.count; i++ {
