@@ -22,7 +22,7 @@ func MergeSort(nums []int) {
 	n := len(nums)
 	start := time.Now()
 	mergeSort(nums, 0, n-1)
-	fmt.Printf("Merge sort: %d ms\n", time.Since(start).Milliseconds())
+	fmt.Printf("Merge heapsort: %d ms\n", time.Since(start).Milliseconds())
 }
 
 // 递归使用归并排序对nums[l:r]范围的元素进行排序
