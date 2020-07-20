@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/corrots/leetcode/search/tools"
 	"github.com/corrots/leetcode/sort/helper"
@@ -22,8 +21,6 @@ func main() {
 }
 
 func BinarySearch(nums []int, target int) int {
-	start := time.Now()
-	defer fmt.Printf("BinarySearch: %d ms\n", time.Since(start).Milliseconds())
 	l, r := 0, len(nums)-1
 	for l <= r {
 		mid := l + (r-l)/2
@@ -39,8 +36,6 @@ func BinarySearch(nums []int, target int) int {
 }
 
 func BinarySearch2(nums []int, target int) int {
-	start := time.Now()
-	defer fmt.Printf("BinarySearch2: %d ms\n", time.Since(start).Milliseconds())
 	return binarySearch2(nums, target, 0, len(nums))
 }
 
