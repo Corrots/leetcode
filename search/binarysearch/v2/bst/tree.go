@@ -1,5 +1,7 @@
 package bst
 
+import "fmt"
+
 type BST struct {
 	root  *Node
 	count int
@@ -10,6 +12,45 @@ type Node struct {
 	Value interface{}
 	left  *Node
 	right *Node
+}
+
+// 前序遍历
+func (b *BST) PreOrder() {
+	b.root.preOrder()
+}
+
+func (n *Node) preOrder() {
+	if n != nil {
+		fmt.Printf("%d ", n.Key)
+		n.left.preOrder()
+		n.right.preOrder()
+	}
+}
+
+// 中序遍历
+func (b *BST) InOrder() {
+	b.root.inOrder()
+}
+
+func (n *Node) inOrder() {
+	if n != nil {
+		n.left.inOrder()
+		fmt.Printf("%d ", n.Key)
+		n.right.inOrder()
+	}
+}
+
+// 后序遍历
+func (b *BST) PostOrder() {
+	b.root.postOrder()
+}
+
+func (n *Node) postOrder() {
+	if n != nil {
+		n.left.postOrder()
+		n.right.postOrder()
+		fmt.Printf("%d ", n.Key)
+	}
 }
 
 func (b *BST) Search(key int) interface{} {
