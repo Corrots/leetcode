@@ -16,6 +16,44 @@ func newNode(key int, value interface{}) *Node {
 	}
 }
 
+func copyNode(n *Node) *Node {
+	return &Node{
+		Key:   n.Key,
+		Value: n.Value,
+		left:  n.left,
+		right: n.right,
+	}
+}
+
+// 删除以node为根的二分搜索树中键值为key的节点
+// 返回删除节点后新的二分搜索树的根
+func (n *Node) remove(key int) (*Node, error) {
+	if n == nil {
+		return nil, fmt.Errorf("node key=%d doesn't exist\n", key)
+	}
+	if key < n.Key {
+		n.left, _ = n.left.remove(key)
+		return n, nil
+	} else if key > n.Key {
+		n.right, _ = n.right.remove(key)
+		return n, nil
+	} else { // key == n.Key
+		if n.left == nil {
+			return n.right, nil
+		}
+		if n.right == nil {
+			return n.left, nil
+		}
+		// 要删除的node左右子树都不为nil时
+		// 删除的节点node的后继节点
+		successor := copyNode(n.right.minimum())
+		successor.right = n.right.removeMin()
+		successor.left = n.left
+		// @TODO 删除node的内存空间
+		return successor, nil
+	}
+}
+
 // 删除以node为根的二分搜索树中的最小节点
 func (n *Node) removeMin() *Node {
 	if n.left == nil {

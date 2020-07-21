@@ -14,6 +14,18 @@ func NewBST() *BST {
 	}
 }
 
+// 从二分搜索树中删除键值为key的节点
+func (b *BST) Remove(key int) {
+	if b.root != nil {
+		var err error
+		b.root, err = b.root.remove(key)
+		if err == nil {
+			// @TODO 如果key对应的node不存在?
+			b.count--
+		}
+	}
+}
+
 func (b *BST) RemoveMin() {
 	if b.root != nil {
 		b.root = b.root.removeMin()
