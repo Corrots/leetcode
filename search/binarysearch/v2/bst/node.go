@@ -16,6 +16,27 @@ func newNode(key int, value interface{}) *Node {
 	}
 }
 
+// 删除以node为根的二分搜索树中的最小节点
+func (n *Node) removeMin() *Node {
+	if n.left == nil {
+		// @TODO 删除内存空间，count--
+		return n.right
+	}
+	// 继续寻找最小值
+	n.left = n.left.removeMin()
+	return n
+}
+
+func (n *Node) removeMax() *Node {
+	if n.right == nil {
+		// @TODO 删除内存空间，count--
+		return n.left
+	}
+	// 继续寻找最大值
+	n.right = n.right.removeMax()
+	return n
+}
+
 // 在以node为根的二叉搜索树中，返回最小键值的节点
 func (n *Node) minimum() *Node {
 	if n.left == nil {
