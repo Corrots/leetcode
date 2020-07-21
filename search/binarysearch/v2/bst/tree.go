@@ -14,6 +14,20 @@ func NewBST() *BST {
 	}
 }
 
+func (b *BST) RemoveMin() {
+	if b.root != nil {
+		b.root = b.root.removeMin()
+		b.count--
+	}
+}
+
+func (b *BST) RemoveMax() {
+	if b.root != nil {
+		b.root = b.root.removeMax()
+		b.count--
+	}
+}
+
 // 返回二叉搜索树中的最小键值
 func (b *BST) Minimum() int {
 	return b.root.minimum().Key
