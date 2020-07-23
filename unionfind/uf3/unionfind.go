@@ -1,5 +1,6 @@
 package uf3
 
+// 基于size的优化
 type UnionFind struct {
 	Parent []int
 	Size   []int // Size[i]表示以i为根的集合中元素的个数
