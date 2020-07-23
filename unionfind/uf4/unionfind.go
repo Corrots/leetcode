@@ -1,20 +1,21 @@
-package uf3
+package uf4
 
+// 基于rank的优化
 type UnionFind struct {
 	Parent []int
-	Size   []int // Size[i]表示以i为根的集合中元素的个数
+	Rank   []int // Rank[i]表示以i为根的集合所表示的树的层数
 	Count  int
 }
 
 func New(n int) *UnionFind {
 	uf := UnionFind{
 		Parent: make([]int, n),
-		Size:   make([]int, n),
+		Rank:   make([]int, n),
 		Count:  n,
 	}
 	for i := 0; i < n; i++ {
 		uf.Parent[i] = i
-		uf.Size[i] = 1
+		uf.Rank[i] = 1
 	}
 	return &uf
 }
@@ -39,11 +40,13 @@ func (uf *UnionFind) Union(p, q int) {
 	if pRoot == qRoot {
 		return
 	}
-	if uf.Size[pRoot] < uf.Size[qRoot] {
+	if uf.Rank[pRoot] < uf.Rank[qRoot] {
 		uf.Parent[pRoot] = qRoot
-		uf.Size[qRoot] += uf.Size[pRoot]
-	} else {
+		// rank不需要维护
+	} else if uf.Rank[qRoot] < uf.Rank[pRoot] {
 		uf.Parent[qRoot] = pRoot
-		uf.Size[pRoot] += uf.Size[qRoot]
+	} else { // uf.Rank[qRoot] = uf.Rank[pRoot]
+		uf.Parent[pRoot] = qRoot
+		uf.Rank[qRoot] += 1
 	}
 }
