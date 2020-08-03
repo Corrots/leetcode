@@ -16,14 +16,15 @@ func main() {
 	fmt.Println(removeElement(nums1, 2))
 }
 
-// 快慢指针
 func removeElement(nums []int, val int) int {
-	i := 0
-	for _, v := range nums {
-		if v != val {
-			nums[i] = v
-			i++
+	n := len(nums)
+	// 循环不变量：nums[0:k)都是不=val的，nums[k:n)均=val
+	k := 0
+	for i := 0; i < n; i++ {
+		if nums[i] != val {
+			nums[k] = nums[i]
+			k++
 		}
 	}
-	return i
+	return k
 }
