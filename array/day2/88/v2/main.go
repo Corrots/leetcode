@@ -20,21 +20,24 @@ func main() {
 	fmt.Println(nums3)
 }
 
+// 归并排序法的归并思路
 func merge(nums1 []int, m int, nums2 []int, n int) {
-	for m > 0 && n > 0 {
-		if nums2[n-1] > nums1[m-1] {
-			nums1[m+n-1] = nums2[n-1]
-			n--
+	tmp := make([]int, m)
+	copy(tmp, nums1)
+	i, j := 0, 0
+	for k := 0; k < m+n; k++ {
+		if i >= m {
+			nums1[k] = nums2[j]
+			j++
+		} else if j >= n {
+			nums1[k] = tmp[i]
+			i++
+		} else if tmp[i] < nums2[j] {
+			nums1[k] = tmp[i]
+			i++
 		} else {
-			nums1[m+n-1] = nums1[m-1]
-			m--
-		}
-	}
-	// 若m为0，则表示nums1中所有元素都比nums2中元素大
-	if m == 0 {
-		// 此处i < n，不能直接遍历nums2
-		for i := 0; i < n; i++ {
-			nums1[i] = nums2[i]
+			nums1[k] = nums2[j]
+			j++
 		}
 	}
 }
