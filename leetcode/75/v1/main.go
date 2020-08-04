@@ -11,23 +11,22 @@ func main() {
 // #75 颜色分类
 // https://leetcode-cn.com/problems/sort-colors/
 func sortColors(nums []int) {
-	var p, q, r int
+	var counts [3]int
 	for i := 0; i < len(nums); i++ {
-		if nums[i] == 0 {
-			p++
-		} else if nums[i] == 1 {
-			q++
-		} else {
-			r++
-		}
+		counts[nums[i]]++
 	}
-	for i := 0; i < p; i++ {
-		nums[i] = 0
+
+	index := 0
+	for i := 0; i < counts[0]; i++ {
+		nums[index] = 0
+		index++
 	}
-	for i := p; i < p+q; i++ {
-		nums[i] = 1
+	for i := 0; i < counts[1]; i++ {
+		nums[index] = 1
+		index++
 	}
-	for i := p + q; i < len(nums); i++ {
-		nums[i] = 2
+	for i := 0; i < counts[2]; i++ {
+		nums[index] = 2
+		index++
 	}
 }

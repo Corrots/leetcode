@@ -10,23 +10,23 @@ func main() {
 
 // #75 颜色分类
 // https://leetcode-cn.com/problems/sort-colors/
+// 使用三路快排的思想解题
 func sortColors(nums []int) {
-	var counts [3]int
-	for i := 0; i < len(nums); i++ {
-		counts[nums[i]]++
-	}
-
-	index := 0
-	for i := 0; i < counts[0]; i++ {
-		nums[index] = 0
-		index++
-	}
-	for i := 0; i < counts[1]; i++ {
-		nums[index] = 1
-		index++
-	}
-	for i := 0; i < counts[2]; i++ {
-		nums[index] = 2
-		index++
+	n := len(nums)
+	// 循环不变量: nums[0:zero]都是0, nums[two:n-1]都是2
+	zero, two := -1, n
+	i := 0
+	// 循环终止条件, i<two
+	for i < two {
+		if nums[i] == 1 {
+			i++
+		} else if nums[i] == 2 {
+			nums[two-1], nums[i] = nums[i], nums[two-1]
+			two--
+		} else if nums[i] == 0 {
+			nums[zero+1], nums[i] = nums[i], nums[zero+1]
+			zero++
+			i++
+		}
 	}
 }
