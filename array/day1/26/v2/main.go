@@ -15,18 +15,17 @@ func main() {
 	fmt.Println(removeDuplicates(nums2))
 }
 
-/**
-
- */
+// 考虑特殊场景，如果数组中没有重复项，只在q-p>1时才进行复制
 func removeDuplicates(nums []int) int {
-	n := len(nums)
-	i, j := 0, 1
-	for j < n {
-		if nums[i] != nums[j] {
-			nums[i+1] = nums[j]
-			i++
+	p, q := 0, 1
+	for q < len(nums) {
+		if nums[p] != nums[q] {
+			if q-p > 1 {
+				nums[p+1] = nums[q]
+			}
+			p++
 		}
-		j++
+		q++
 	}
-	return i + 1
+	return p + 1
 }
