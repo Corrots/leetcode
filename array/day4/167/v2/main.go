@@ -20,15 +20,15 @@ func main() {
 
 // 对撞指针 O(n)
 func twoSum(numbers []int, target int) []int {
-	l, r := 0, len(numbers)-1
-	for l < r {
-		sum := numbers[l] + numbers[r]
+	p, q := 0, len(numbers)-1
+	for p < q {
+		sum := numbers[p] + numbers[q]
 		if sum == target {
-			return []int{l + 1, r + 1}
+			return []int{p + 1, q + 1}
 		} else if sum < target {
-			l++
+			p++
 		} else {
-			r--
+			q--
 		}
 	}
 	return nil
