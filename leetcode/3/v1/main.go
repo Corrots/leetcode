@@ -17,8 +17,9 @@ func lengthOfLongestSubstring(s string) int {
 		return len(s)
 	}
 	var freq [256]int
-	res := 0
+	// 滑动窗口为s[l...r]
 	l, r := 0, -1
+	res := 0
 	for l < len(s) {
 		if r+1 < len(s) && freq[s[r+1]] == 0 {
 			r++
