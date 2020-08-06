@@ -12,14 +12,13 @@ func main() {
 }
 
 func reverseString(s []byte) {
-	if s == nil {
+	if len(s) == 0 {
 		return
 	}
-	n := len(s)
-	i, j := 0, n-1
-	for i < j {
-		s[i], s[j] = s[j], s[i]
-		i++
-		j--
+	p, q := 0, len(s)-1
+	for p < q {
+		s[p], s[q] = s[q], s[p]
+		p++
+		q--
 	}
 }

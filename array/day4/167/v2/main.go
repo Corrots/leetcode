@@ -22,14 +22,13 @@ func main() {
 func twoSum(numbers []int, target int) []int {
 	p, q := 0, len(numbers)-1
 	for p < q {
-		sum := numbers[p] + numbers[q]
-		if sum == target {
+		if numbers[p]+numbers[q] == target {
 			return []int{p + 1, q + 1}
-		} else if sum < target {
-			p++
-		} else {
+		} else if numbers[p]+numbers[q] > target {
 			q--
+		} else {
+			p++
 		}
 	}
-	return nil
+	return []int{-1, -1}
 }
