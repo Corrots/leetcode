@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 func main() {
@@ -13,22 +12,25 @@ func main() {
 // https://leetcode-cn.com/problems/minimum-size-subarray-sum/
 // 滑动窗口
 func minSubArrayLen(s int, nums []int) int {
-	n := len(nums)
-	if n == 0 {
+	if len(nums) == 0 {
 		return 0
 	}
-	res := math.MaxInt64
-	for i := 0; i < n; i++ {
-		sum := 0
-		for j := i; j < n; j++ {
-			sum += nums[j]
-			if sum >= s {
-				res = min(res, j-i+1)
-				break
-			}
+	res := len(nums) + 1
+	sum := 0
+	l, r := 0, -1
+	for l < len(nums) {
+		if r+1 < len(nums) && sum < s {
+			r++
+			sum += nums[r]
+		} else {
+			sum -= nums[l]
+			l++
+		}
+		if sum >= s {
+			res = min(res, r-l+1)
 		}
 	}
-	if res == math.MaxInt64 {
+	if res == len(nums)+1 {
 		return 0
 	}
 	return res
