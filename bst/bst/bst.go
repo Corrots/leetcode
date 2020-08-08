@@ -15,7 +15,7 @@ func newNode(e interface{}) *Node {
 	return &Node{e: e}
 }
 
-func New() *BST {
+func NewBST() *BST {
 	return &BST{}
 }
 
