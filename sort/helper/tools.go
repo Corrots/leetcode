@@ -28,3 +28,12 @@ func InsertionSort(nums []int, l, r int) {
 		nums[j] = e
 	}
 }
+
+func IsSorted(nums []int) bool {
+	for i := 1; i < len(nums); i++ {
+		if nums[i-1] > nums[i] {
+			return false
+		}
+	}
+	return true
+}
