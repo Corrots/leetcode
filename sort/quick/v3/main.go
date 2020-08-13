@@ -11,15 +11,17 @@ import (
 // 优化对于大量重复元素的排序
 // 双路快排
 func main() {
-	nums1 := []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
+	nums1 := []int{10, 2, 3, 2, 3, 5, 4, 3, 2, 1}
 	QuickSort(nums1)
 	fmt.Println(nums1)
 	nums2 := helper.GenerateRandomData(1000000, 0, 10000000)
 	nums3 := make([]int, 1000000)
 	copy(nums3, nums2)
 	QuickSort(nums2)
+	fmt.Println("nums2 sorted: ", helper.IsSorted(nums2))
 	nums4 := helper.GenerateRandomData(1000000, 0, 10)
 	QuickSort(nums4)
+	fmt.Println("nums4 sorted: ", helper.IsSorted(nums4))
 }
 func QuickSort(nums []int) {
 	start := time.Now()
@@ -63,6 +65,7 @@ func partition(nums []int, l, r int) (p int) {
 		i++
 		j--
 	}
-	nums[l], nums[i-1] = nums[i-1], nums[l]
+	// 此处是nums[l]与nums[j]互换位置
+	nums[l], nums[j] = nums[j], nums[l]
 	return j
 }
