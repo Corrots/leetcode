@@ -20,16 +20,14 @@ func isAnagram(s string, t string) bool {
 	if len(s) != len(t) {
 		return false
 	}
-	var counter [26]int
+	var count [26]int
 	for _, v := range s {
-		counter[v-'a']++
+		count[v-'a']++
 	}
-
 	for _, v := range t {
-		counter[v-'a']--
+		count[v-'a']--
 	}
-
-	for _, v := range counter {
+	for _, v := range count {
 		if v != 0 {
 			return false
 		}
