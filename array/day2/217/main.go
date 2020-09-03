@@ -29,14 +29,14 @@ func main() {
 //	return false
 //}
 
-// 利用golang的map
+//
 func containsDuplicate(nums []int) bool {
-	m := make(map[int]int)
+	record := make(map[int]bool)
 	for _, v := range nums {
-		if _, ok := m[v]; ok {
+		if record[v] {
 			return true
 		}
-		m[v] = 0
+		record[v] = true
 	}
 	return false
 }
