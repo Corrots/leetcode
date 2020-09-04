@@ -6,10 +6,10 @@ func main() {
 
 //https://leetcode-cn.com/problems/same-tree/
 func isSameTree(p *TreeNode, q *TreeNode) bool {
-	if p == nil {
-		return q == nil
+	if p == nil && q == nil {
+		return true
 	}
-	if q == nil {
+	if p == nil || q == nil {
 		return false
 	}
 	if p.Val != q.Val {
