@@ -24,9 +24,3 @@ func check(p, q *TreeNode) bool {
 	}
 	return check(p.Left, q.Right) && check(p.Right, q.Left)
 }
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
