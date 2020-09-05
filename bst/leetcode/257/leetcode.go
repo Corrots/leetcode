@@ -28,3 +28,9 @@ func treePaths(root *TreeNode, path string) {
 		treePaths(root.Right, subPath)
 	}
 }
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
