@@ -8,25 +8,21 @@ func main() {
 
 //https://leetcode-cn.com/problems/binary-tree-paths/
 func binaryTreePaths(root *TreeNode) []string {
-	treePaths(root, "")
-	return res
-}
-
-var res []string
-
-func treePaths(root *TreeNode, path string) {
+	var res []string
 	if root == nil {
-		return
+		return res
 	}
-	subPath := path
-	subPath += strconv.Itoa(root.Val)
 	if root.Left == nil && root.Right == nil {
-		res = append(res, subPath)
-	} else {
-		subPath += "->"
-		treePaths(root.Left, subPath)
-		treePaths(root.Right, subPath)
+		res = append(res, strconv.Itoa(root.Val))
+		return res
 	}
+	for _, v := range binaryTreePaths(root.Left) {
+		res = append(res, strconv.Itoa(root.Val)+"->"+v)
+	}
+	for _, v := range binaryTreePaths(root.Right) {
+		res = append(res, strconv.Itoa(root.Val)+"->"+v)
+	}
+	return res
 }
 
 type TreeNode struct {
