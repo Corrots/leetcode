@@ -6,26 +6,23 @@ func main() {
 
 //https://leetcode-cn.com/problems/path-sum/
 func hasPathSum(root *TreeNode, sum int) bool {
-	result = make(map[int]bool)
-	getSum(root, 0)
+	result := make(map[int]bool)
+	getSum(&result, root, 0)
 	if result[sum] {
 		return true
 	}
 	return false
 }
 
-var result map[int]bool
-
-func getSum(root *TreeNode, sub int) {
-	//var result int
+func getSum(result *map[int]bool, root *TreeNode, sub int) {
 	if root != nil {
 		toSum := sub
 		toSum += root.Val
 		if root.Left == nil && root.Right == nil {
-			result[toSum] = true
+			(*result)[toSum] = true
 		} else {
-			getSum(root.Left, toSum)
-			getSum(root.Right, toSum)
+			getSum(result, root.Left, toSum)
+			getSum(result, root.Right, toSum)
 		}
 	}
 }
