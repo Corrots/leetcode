@@ -1,7 +1,12 @@
 package main
 
-func main() {
+import "fmt"
 
+func main() {
+	digits := "23"
+	fmt.Println(digits[0])
+	fmt.Println(digits[0] - '0')
+	fmt.Println(letterCombinations(digits))
 }
 
 /**
@@ -15,7 +20,7 @@ s(digits[0...n-1])
 var letterMap = [10]string{
 	" ",
 	"", "abc", "def",
-	"ghi", "jki", "mno",
+	"ghi", "jkl", "mno",
 	"pqrs", "tuv", "wxyz",
 }
 
@@ -25,19 +30,20 @@ func letterCombinations(digits string) []string {
 	if len(digits) == 0 {
 		return res
 	}
-	findCombinations(&digits, 0, "")
+	findCombinations(digits, 0, "")
 	return res
 }
 
 var res []string
 
-func findCombinations(digits *string, index int, s string) {
-	if index == len(*digits) {
-		// 保存s
+func findCombinations(digits string, index int, s string) {
+	if index == len(digits) {
 		res = append(res, s)
 		return
 	}
-	char := (*digits)[index]
+	// 第一次，digits[0] = 2
+	char := digits[index]
+	// 获取数字对应的字符串
 	letters := letterMap[char-'0']
 	for i := 0; i < len(letters); i++ {
 		findCombinations(digits, index+1, s+string(letters[i]))
