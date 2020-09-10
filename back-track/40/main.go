@@ -18,23 +18,24 @@ func combinationSum2(candidates []int, target int) [][]int {
 	}
 	sort.Ints(candidates)
 	var dfs func(int, int, []int)
-	dfs = func(index int, target int, c []int) {
+	dfs = func(start int, target int, path []int) {
 		if target == 0 {
-			res = append(res, append([]int{}, c...))
+			res = append(res, append([]int{}, path...))
+			return
 		}
-		n := len(candidates)
-		for i := index; i < n; i++ {
-			index = i
-			if target < 0 {
-				return
+		if target < 0 {
+			return
+		}
+		// target > 0
+		for i := start; i < len(candidates); i++ {
+			// 去重
+			if i > start && candidates[i-1] == candidates[i] {
+				continue
 			}
-			for i < n-1 && candidates[i] == candidates[i+1] {
-				i++
-			}
-			tmp := make([]int, len(c))
-			copy(tmp, c)
+			tmp := make([]int, len(path))
+			copy(tmp, path)
 			tmp = append(tmp, candidates[i])
-			dfs(index+1, target-candidates[i], tmp)
+			dfs(i+1, target-candidates[i], tmp)
 		}
 	}
 	dfs(0, target, []int{})

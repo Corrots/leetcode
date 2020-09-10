@@ -7,8 +7,8 @@ import (
 func main() {
 	candidates := []int{2, 3, 6, 7}
 	fmt.Println(combinationSum(candidates, 7))
-	candidates1 := []int{2, 3, 5}
-	fmt.Println(combinationSum(candidates1, 8))
+	//candidates1 := []int{2, 3, 5}
+	//fmt.Println(combinationSum(candidates1, 8))
 }
 
 // https://leetcode-cn.com/problems/combination-sum/
@@ -31,7 +31,9 @@ func combinationSum(candidates []int, target int) [][]int {
 			tmp := make([]int, len(path))
 			copy(tmp, path)
 			tmp = append(tmp, candidates[i])
+			fmt.Printf("start: %d, target: %d, path: %v\n", i, target-candidates[i], tmp)
 			dfs(i, target-candidates[i], tmp)
+			fmt.Printf("撤销path至: %v\n", path)
 		}
 	}
 	dfs(0, target, []int{})
