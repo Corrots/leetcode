@@ -7,8 +7,8 @@ import (
 func main() {
 	candidates := []int{2, 3, 6, 7}
 	fmt.Println(combinationSum(candidates, 7))
-	candidates1 := []int{2, 3, 5}
-	fmt.Println(combinationSum(candidates1, 8))
+	//candidates1 := []int{2, 3, 5}
+	//fmt.Println(combinationSum(candidates1, 8))
 }
 
 // https://leetcode-cn.com/problems/combination-sum/
@@ -17,22 +17,25 @@ func combinationSum(candidates []int, target int) [][]int {
 	if len(candidates) == 0 {
 		return res
 	}
-	var backTrack func(int, int, []int)
-	backTrack = func(i int, target int, c []int) {
-		if i == len(candidates) || target < 0 {
+	var dfs func(int, int, []int)
+	dfs = func(start, target int, path []int) {
+		if target < 0 || start == len(candidates) {
 			return
 		}
 		if target == 0 {
-			res = append(res, append([]int{}, c...))
+			res = append(res, append([]int{}, path...))
 			return
 		}
-		// 1.直接跳过当前元素
-		backTrack(i+1, target, c)
-		// 2.继续当前元素
-		c = append(c, candidates[i])
-		backTrack(i, target-candidates[i], c)
-		c = c[:len(c)-1]
+		// target > 0
+		for i := start; i < len(candidates); i++ {
+			tmp := make([]int, len(path))
+			copy(tmp, path)
+			tmp = append(tmp, candidates[i])
+			fmt.Printf("start: %d, target: %d, path: %v\n", i, target-candidates[i], tmp)
+			dfs(i, target-candidates[i], tmp)
+			fmt.Printf("撤销path至: %v\n", path)
+		}
 	}
-	backTrack(0, target, []int{})
+	dfs(0, target, []int{})
 	return res
 }
