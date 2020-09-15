@@ -33,6 +33,7 @@ func solveNQueens(n int) [][]string {
 				tmp := make([]int, len(row))
 				copy(tmp, row)
 				tmp = append(tmp, j)
+				// 在第i+1行放置皇后
 				putQueens(i+1, tmp)
 				// 回溯
 				col[j] = false
@@ -53,7 +54,6 @@ func formatRow(n int, row []int) []string {
 		for j := 0; j < n; j++ {
 			//fmt.Printf("j: %d, row[i]: %d\n", j, row[i])
 			if j == row[i] {
-				//res[i] = append(res[i], "Q")
 				str = append(str, "Q")
 			} else {
 				str = append(str, ".")
