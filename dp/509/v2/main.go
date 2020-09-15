@@ -14,7 +14,7 @@ func main() {
 }
 
 //https://leetcode-cn.com/problems/fibonacci-number/
-// 动态规划 - 自上向下的解决问题
+// 动态规划 - 自底向上的解决问题
 func fib(N int) int {
 	if N <= 1 {
 		return N
