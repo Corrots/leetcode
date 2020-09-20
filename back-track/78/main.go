@@ -9,7 +9,8 @@ func main() {
 
 //https://leetcode-cn.com/problems/subsets/
 func subsets(nums []int) [][]int {
-	res := [][]int{[]int{}}
+	var res [][]int
+	res = append(res, []int{})
 	if len(nums) == 0 {
 		return res
 	}
@@ -19,7 +20,7 @@ func subsets(nums []int) [][]int {
 			tmp := make([]int, len(path))
 			copy(tmp, path)
 			tmp = append(tmp, nums[i])
-			res = append(res, append([]int{}, tmp...))
+			res = append(res, tmp)
 			dfs(i+1, tmp)
 		}
 	}
