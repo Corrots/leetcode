@@ -1,5 +1,7 @@
 package main
 
+import "math"
+
 func main() {
 
 }
@@ -11,20 +13,31 @@ func findMode(root *TreeNode) []int {
 		return res
 	}
 	var inOrder func(*TreeNode)
-	orderMap := make(map[int]int)
+	var list []int
 	inOrder = func(node *TreeNode) {
 		if node == nil {
 			return
 		}
 		inOrder(node.Left)
-		orderMap[node.Val]++
+		list = append(list, node.Val)
 		inOrder(node.Right)
 	}
 	inOrder(root)
-	counter := 0
-	for k, v := range orderMap {
-		if v >= counter {
-			counter = v
+	var count, maxCount int
+	base := math.MinInt64
+	for i := 0; i < len(list); i++ {
+		if base == list[i] {
+			count++
+		} else {
+			base = list[i]
+			count = 1
+		}
+		if count == maxCount {
+			res = append(res, base)
+		} else if count > maxCount {
+			maxCount = count
+			res = []int{}
+			res = append([]int{}, base)
 		}
 	}
 	return res
