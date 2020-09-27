@@ -12,16 +12,18 @@ func main() {
 }
 
 //https://leetcode-cn.com/problems/integer-break/
+// 记忆化搜索解法
 func integerBreak(n int) int {
-	if n < 2 {
-		return 0
+	if n == 1 {
+		return 1
 	}
+	// 初始化记忆化数组memo
 	memo := make([]int, n+1)
 	for i := 0; i < n+1; i++ {
 		memo[i] = math.MinInt64
 	}
-	// 将n分割成至少2部分，可获得最大乘积
 	var dfs func(int) int
+	// 将n分割成至少2部分，求分割后数字的最大乘积
 	dfs = func(n int) int {
 		if n == 1 {
 			return 1
@@ -31,6 +33,7 @@ func integerBreak(n int) int {
 		}
 		res := math.MinInt64
 		for i := 1; i < n; i++ {
+			// n-i不分割，直接i*(n-i)
 			res = max(res, i*(n-i), i*dfs(n-i))
 		}
 		memo[n] = res
