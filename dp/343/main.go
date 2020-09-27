@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	fmt.Println(integerBreak(2))
 	n := 10
 	fmt.Println(integerBreak(n))
 }
@@ -19,6 +20,7 @@ func integerBreak(n int) int {
 	for i := 0; i < n+1; i++ {
 		memo[i] = math.MinInt64
 	}
+	// 将n分割成至少2部分，可获得最大乘积
 	var dfs func(int) int
 	dfs = func(n int) int {
 		if n == 1 {
@@ -31,6 +33,7 @@ func integerBreak(n int) int {
 		for i := 1; i < n; i++ {
 			res = max(res, i*(n-i), i*dfs(n-i))
 		}
+		memo[n] = res
 		return res
 	}
 	return dfs(n)
