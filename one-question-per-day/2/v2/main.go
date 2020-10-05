@@ -3,13 +3,15 @@ package main
 import "fmt"
 
 func main() {
-	nums1 := []int{2, 4, 3}
+	nums1 := []int{3, 2, 1}
 	l1 := CreateLinkedList(nums1, len(nums1))
-	nums2 := []int{5, 6, 4}
+	nums2 := []int{9}
 	l2 := CreateLinkedList(nums2, len(nums2))
 	PrintLinkedList(addTwoNumbers(l1, l2))
 }
 
+// 不需要预先补0
+// 在循环遍历链表的过程中直接进行相加和进位操作
 //https://leetcode-cn.com/problems/add-two-numbers/
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1 == nil {
@@ -18,39 +20,31 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l2 == nil {
 		return l1
 	}
-	dummy := &ListNode{}
-	p, q, cur := l1, l2, dummy
+	p, q, cur := l1, l2, &ListNode{}
+	dummy := cur
 	var carry int
 	for p != nil || q != nil {
-		var x, y int
+		var sum int
 		if p != nil {
-			x = p.Val
-		} else {
-			x = 0
-		}
-		if q != nil {
-			y = q.Val
-		} else {
-			y = 0
-		}
-		sum := carry + x + y
-		carry = sum / 10
-		cur.Next = &ListNode{Val: sum % 10}
-		if p != nil {
+			sum += p.Val
 			p = p.Next
 		}
 		if q != nil {
+			sum += q.Val
 			q = q.Next
 		}
+		sum += carry
+		cur.Next = &ListNode{Val: sum % 10}
+		carry = sum / 10
+		cur = cur.Next
 	}
 	if carry > 0 {
-		cur.Next = &ListNode{Val: carry}
+		cur.Next = &ListNode{Val: carry % 10}
 	}
 	return dummy.Next
 }
 
 //
-
 type ListNode struct {
 	Val  int
 	Next *ListNode
