@@ -10,8 +10,8 @@ func main() {
 	PrintLinkedList(addTwoNumbers(l1, l2))
 }
 
-//	1.获取链表l1和l2的长度，将短的链表末尾补0
-//	2.依次取出链表中的每一位，来进行相加操作，注意进位
+// 不需要预先补0
+// 在循环遍历链表的过程中直接进行相加和进位操作
 //https://leetcode-cn.com/problems/add-two-numbers/
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1 == nil {
@@ -20,36 +20,28 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l2 == nil {
 		return l1
 	}
-	// 将l1和l2中较短链表缺省部分补0
-	p, q := l1, l2
-	for p.Next != nil || q.Next != nil {
-		if p.Next == nil {
-			p.Next = &ListNode{Val: 0}
-		}
-		if q.Next == nil {
-			q.Next = &ListNode{Val: 0}
-		}
-		p = p.Next
-		q = q.Next
-	}
-	//3->2->1->nil
-	//9->0->0->nil
-	// 每位求和，并进位
-	l3 := &ListNode{}
-	res := l3
+	p, q, cur := l1, l2, &ListNode{}
+	dummy := cur
 	var carry int
-	for l1 != nil {
-		sum := l1.Val + l2.Val + carry
-		l3.Next = &ListNode{Val: sum % 10} // 2->3
-		carry = sum / 10                   // 1->0
-		l3 = l3.Next
-		l1 = l1.Next
-		l2 = l2.Next
+	for p != nil || q != nil {
+		var sum int
+		if p != nil {
+			sum += p.Val
+			p = p.Next
+		}
+		if q != nil {
+			sum += q.Val
+			q = q.Next
+		}
+		sum += carry
+		cur.Next = &ListNode{Val: sum % 10}
+		carry = sum / 10
+		cur = cur.Next
 	}
 	if carry > 0 {
-		l3.Next = &ListNode{Val: carry % 10}
+		cur.Next = &ListNode{Val: carry % 10}
 	}
-	return res.Next
+	return dummy.Next
 }
 
 //
