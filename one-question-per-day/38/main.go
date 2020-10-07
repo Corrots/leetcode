@@ -20,8 +20,6 @@ func main() {
 //	1211
 //	111221
 //	312211
-//	13112221
-//	1113213211
 //https://leetcode-cn.com/problems/count-and-say/
 func countAndSay(n int) string {
 	if n == 1 {
