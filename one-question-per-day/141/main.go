@@ -8,6 +8,7 @@ func main() {
 	PrintLinkedList(head)
 }
 
+// 思路：利用快慢指针，快指针每次走2步，慢指针每次走1步，如果快慢指针相遇，则存在环形
 //https://leetcode-cn.com/problems/linked-list-cycle/
 func hasCycle(head *ListNode) bool {
 	if head == nil || head.Next == nil {
@@ -18,8 +19,8 @@ func hasCycle(head *ListNode) bool {
 		if fast == slow {
 			return true
 		}
-		fast = fast.Next.Next
 		slow = slow.Next
+		fast = fast.Next.Next
 	}
 	return false
 }
