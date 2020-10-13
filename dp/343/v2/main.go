@@ -19,8 +19,9 @@ func integerBreak(n int) int {
 	}
 	memo := make([]int, n+1)
 	memo[1] = 1
-	for i := 2; i <= n; i++ {
+	for i := 2; i < n+1; i++ {
 		for j := 1; j < i; j++ {
+			// 将i分割成 j + (i-j)
 			memo[i] = max(memo[i], j*(i-j), j*memo[i-j])
 		}
 	}
