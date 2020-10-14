@@ -18,29 +18,31 @@ func Knapsack01(w, v []int, C int) int {
 	if n == 0 || C <= 0 {
 		return 0
 	}
-	// 记忆化
 	memo := make([][]int, n)
 	for i := 0; i < n; i++ {
-		for j := 0; j <= C; j++ {
+		for j := 0; j < C+1; j++ {
 			memo[i] = append(memo[i], -1)
 		}
 	}
-	var maxValue func(index, c int) int
-	maxValue = func(index, c int) int {
-		if index <= 0 || c <= 0 {
-			return 0
+	// 先解决最基本问题
+	for j := 0; j < C+1; j++ {
+		memo[0][j] = 0
+		// j表示背包当前的容量，只有当j>=物品重量时，才可将物品放入背包
+		if j >= w[0] {
+			memo[0][j] = v[0]
 		}
-		if memo[index][c] != -1 {
-			return memo[index][c]
-		}
-		res := maxValue(index-1, c)
-		if c >= w[index] {
-			res = max(res, v[index]+maxValue(index-1, c-w[index]))
-		}
-		memo[index][c] = res
-		return res
 	}
-	return maxValue(n-1, C)
+	for i := 1; i < n; i++ {
+		for j := 0; j < C+1; j++ {
+			// 选择1：物品i不放入背包，则背包价值=memo[i-1][j]
+			memo[i][j] = memo[i-1][j]
+			// 选择2：将物品i放入背包，则背包价值=物品i的价值+memo[i-1][j-w[i]]
+			if j >= w[i] {
+				memo[i][j] = v[i] + memo[i-1][j-w[i]]
+			}
+		}
+	}
+	return memo[n-1][C]
 }
 
 func max(i, j int) int {
