@@ -14,23 +14,23 @@ func main() {
 
 // 基础递归实现
 func Knapsack01(w, v []int, C int) int {
-	// 基础边界检查
 	n := len(w)
 	if n == 0 || C <= 0 {
 		return 0
 	}
-	var dfs func(index, c int) int
-	dfs = func(index, c int) int {
+	// 用[0...index]中的物品，填充容量为c的背包的最大价值
+	var maxValue func(index, c int) int
+	maxValue = func(index, c int) int {
 		if index <= 0 || c <= 0 {
 			return 0
 		}
-		res := dfs(index-1, c)
+		res := maxValue(index-1, c)
 		if c >= w[index] {
-			res = max(res, v[index]+dfs(index-1, c-w[index]))
+			res = max(res, v[index]+maxValue(index-1, c-w[index]))
 		}
 		return res
 	}
-	return dfs(n-1, C)
+	return maxValue(n-1, C)
 }
 
 func max(i, j int) int {
