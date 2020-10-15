@@ -14,12 +14,12 @@ func connect(root *Node) *Node {
 	}
 	q := []*Node{root}
 	for len(q) > 0 {
-		tmp := q
+		p := q
 		q = nil
-		for i, node := range tmp {
-			// 设置每一层node的Next
-			if i+1 < len(tmp) {
-				node.Next = tmp[i+1]
+		//n := len(p)
+		for k, node := range p {
+			if k < len(p)-1 {
+				node.Next = p[k+1]
 			}
 			if node.Left != nil {
 				q = append(q, node.Left)
