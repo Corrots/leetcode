@@ -4,6 +4,11 @@ func main() {
 
 }
 
+// 思路
+// 左孩子的Next=右孩子
+// 右孩子的Next=当前节点的Next的左孩子
+// 递归处理当前节点的左子树和右子树
+
 //https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/
 func connect(root *Node) *Node {
 	if root == nil {
