@@ -7,7 +7,7 @@ func main() {
 }
 
 // 尝试双指针解法
-// 思路：定义skip来记录'#'，遍历字符串，若是'#'则skip+1；
+// 思路：定义skip来记录'#'，若是'#'则skip+1；
 // 根据skip进行判断，若skip>0，则说明当前字符需要删除，skip-1；若skip为0，则说明当前字符不需删除
 //https://leetcode-cn.com/problems/backspace-string-compare/
 func backspaceCompare(S string, T string) bool {
@@ -37,6 +37,7 @@ func backspaceCompare(S string, T string) bool {
 				break
 			}
 		}
+		//
 		if i >= 0 && j >= 0 {
 			if S[i] != T[j] {
 				return false
