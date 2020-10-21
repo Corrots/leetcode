@@ -3,16 +3,18 @@ package main
 import "fmt"
 
 func main() {
-	nums1 := []int{1, 2, 3, 4}
+	nums1 := []int{1, 2, 3, 4, 5}
 	head := CreateLinkedList(nums1, len(nums1))
 	reorderList(head)
 	PrintLinkedList(head)
 }
 
-// 思路：
+// 思路:	1.将链表节点存入数组中，利用数组对应索引来重排链表
+// 		2.定义双指针p, q分别位于数组头和尾(对撞指针)
+//		3.循环结束,list[p]即为尾节点，list[p].Next=nil
 //https://leetcode-cn.com/problems/reorder-list/
 func reorderList(head *ListNode) {
-	if head == nil || head.Next == nil {
+	if head == nil {
 		return
 	}
 	var list []*ListNode
@@ -21,7 +23,6 @@ func reorderList(head *ListNode) {
 		list = append(list, cur)
 		cur = cur.Next
 	}
-	// 双指针
 	p, q := 0, len(list)-1
 	for p < q {
 		list[p].Next = list[q]
