@@ -44,10 +44,3 @@ func Knapsack01(w, v []int, C int) int {
 	}
 	return memo[n-1][C]
 }
-
-func max(i, j int) int {
-	if i > j {
-		return i
-	}
-	return j
-}
