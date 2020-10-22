@@ -6,7 +6,7 @@ func main() {
 	fmt.Println(combine(4, 2))
 }
 
-// 2020-09-08
+// 2020-10-08
 //https://leetcode-cn.com/problems/combinations/
 func combine(n int, k int) (ans [][]int) {
 	temp := []int{}
