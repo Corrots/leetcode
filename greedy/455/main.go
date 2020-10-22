@@ -20,11 +20,9 @@ func findContentChildren(g []int, s []int) int {
 	for gi >= 0 && si >= 0 {
 		if s[si] >= g[gi] {
 			res++
-			gi--
 			si--
-		} else {
-			gi--
 		}
+		gi--
 	}
 	return res
 }
