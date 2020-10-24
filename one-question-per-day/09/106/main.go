@@ -1,7 +1,7 @@
 package main
 
 func main() {
-
+	buildTree(nil, nil)
 }
 
 // 1.后序遍历的最后一个节点即为根节点的val，通过val找到其在中序遍历的位置，左右两侧分别为左右子树的节点
