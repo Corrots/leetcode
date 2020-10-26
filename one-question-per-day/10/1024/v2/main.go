@@ -10,7 +10,7 @@ func main() {
 }
 
 // 贪心算法求解
-//https://leetcode-cn.com/problems/video-stitching/
+//https://gleetcode-cn.com/problems/video-stitching/
 func videoStitching(clips [][]int, T int) int {
 
 }
