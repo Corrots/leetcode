@@ -11,6 +11,9 @@ func main() {
 	fmt.Println(uniqueOccurrences(nums2))
 }
 
+// 1.使用哈希表来记录每个数字在数组中出现的次数
+// 2.使用另一个哈希表来记录上一个哈希表中数字出现的次数
+
 //https://leetcode-cn.com/problems/unique-number-of-occurrences/
 func uniqueOccurrences(arr []int) bool {
 	if len(arr) == 0 {
