@@ -14,6 +14,7 @@ func main() {
 	fmt.Println(intersection(nums3, nums4))
 }
 
+// 解法：排序+双指针
 //https://leetcode-cn.com/problems/intersection-of-two-arrays/
 func intersection(nums1, nums2 []int) []int {
 	var res []int
