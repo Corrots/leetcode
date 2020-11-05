@@ -6,6 +6,8 @@ func main() {
 
 }
 
+// TODO 思路待补充
+
 //https://leetcode-cn.com/problems/word-ladder/solution/dan-ci-jie-long-by-leetcode-solution/
 func ladderLength(beginWord string, endWord string, wordList []string) int {
 	wordId := make(map[string]int)
