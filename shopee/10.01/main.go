@@ -9,7 +9,6 @@ func main() {
 //https://leetcode-cn.com/problems/sorted-merge-lcci/
 func merge(A []int, m int, B []int, n int) {
 	p, q := m-1, n-1
-
 	var val int
 	for tail := m + n - 1; p >= 0 || q >= 0; tail-- {
 		if p < 0 {
