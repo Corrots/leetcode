@@ -1,5 +1,7 @@
 package main
 
+import "container/heap"
+
 func main() {
 
 }
@@ -19,17 +21,19 @@ func getLeastNumbers(arr []int, k int) []int {
 	}
 	pq := &maxHeap{}
 	for i := 0; i < k; i++ {
-		pq.Push(arr[i])
+		heap.Push(pq, arr[i])
 	}
+	// heapify
+	heap.Init(pq)
 	for i := k; i < n; i++ {
 		if pq.Len() > 0 && arr[i] < pq.Peek().(int) {
-			pq.Pop()
-			pq.Push(arr[i])
+			heap.Pop(pq)
+			heap.Push(pq, arr[i])
 		}
 	}
 
 	for i := 0; i < k; i++ {
-		res = append(res, pq.Pop().(int))
+		res = append(res, heap.Pop(pq).(int))
 	}
 	return res
 }
@@ -60,5 +64,5 @@ func (h *maxHeap) Pop() (v interface{}) {
 
 // 查看堆顶元素
 func (h *maxHeap) Peek() interface{} {
-	return (*h)[len(*h)-1]
+	return (*h)[0]
 }
