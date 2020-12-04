@@ -19,16 +19,16 @@ func main() {
 }
 
 // 对撞指针 O(n)
-func twoSum(numbers []int, target int) []int {
-	p, q := 0, len(numbers)-1
+func twoSum(nums []int, target int) []int {
+	p, q := 0, len(nums)-1
 	for p < q {
-		if numbers[p]+numbers[q] == target {
+		if nums[p]+nums[q] == target {
 			return []int{p + 1, q + 1}
-		} else if numbers[p]+numbers[q] > target {
+		} else if nums[p]+nums[q] > target {
 			q--
 		} else {
 			p++
 		}
 	}
-	return []int{-1, -1}
+	return nil
 }
