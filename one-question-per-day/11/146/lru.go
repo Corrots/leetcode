@@ -1,5 +1,6 @@
 package v1
 
+//https://leetcode-cn.com/problems/lru-cache/
 type LRUCache struct {
 	head, tail *DLinkedNode
 	cache      map[int]*DLinkedNode
