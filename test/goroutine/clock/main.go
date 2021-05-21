@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// tcp服务
 func main() {
 	listener, err := net.Listen("tcp", ":8000")
 	if err != nil {
