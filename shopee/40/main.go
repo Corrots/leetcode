@@ -17,17 +17,19 @@ func main() {
 func getLeastNumbers(arr []int, k int) []int {
 	var res []int
 	n := len(arr)
-	if n == 0 || k <= 0 || n < k {
+	if n <= 0 || k <= 0 || n < k {
 		return res
 	}
-	pq := &maxHeap{}
+	pq := &MaxHeap{}
+	// 先将数组的前k个元素加入堆中
 	for i := 0; i < k; i++ {
 		heap.Push(pq, arr[i])
 	}
-	// heapify
 	heap.Init(pq)
+	// 继续遍历数组
 	for i := k; i < n; i++ {
-		if pq.Len() > 0 && arr[i] < pq.Peek().(int) {
+		// 每个元素与堆顶的元素比较大小，若<堆顶元素，则推出堆顶元素，将当前元素加入堆中
+		if pq.Len() > 0 && arr[i] < pq.Peek() {
 			heap.Pop(pq)
 			heap.Push(pq, arr[i])
 		}
@@ -39,31 +41,31 @@ func getLeastNumbers(arr []int, k int) []int {
 	return res
 }
 
-// 基于go interface实现最大堆
-type maxHeap []int
+type MaxHeap []int
 
-func (h *maxHeap) Len() int {
+func (h *MaxHeap) Len() int {
 	return len(*h)
 }
 
-func (h *maxHeap) Less(i, j int) bool {
+// Less 最大堆
+func (h *MaxHeap) Less(i, j int) bool {
 	return (*h)[i] > (*h)[j]
 }
 
-func (h *maxHeap) Swap(i, j int) {
+func (h *MaxHeap) Swap(i, j int) {
 	(*h)[i], (*h)[j] = (*h)[j], (*h)[i]
 }
 
-func (h *maxHeap) Push(x interface{}) {
+func (h *MaxHeap) Push(x interface{}) {
 	*h = append(*h, x.(int))
 }
 
-func (h *maxHeap) Pop() (v interface{}) {
-	*h, v = (*h)[:h.Len()-1], (*h)[h.Len()-1]
-	return
+func (h *MaxHeap) Pop() interface{} {
+	res := (*h)[len(*h)-1]
+	*h = (*h)[:len(*h)-1]
+	return res
 }
 
-// 查看堆顶元素
-func (h *maxHeap) Peek() interface{} {
+func (h *MaxHeap) Peek() int {
 	return (*h)[0]
 }
