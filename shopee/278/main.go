@@ -25,5 +25,5 @@ func firstBadVersion(n int) int {
  *			          false if current version is good
  */
 func isBadVersion(version int) bool {
-
+	return false
 }
