@@ -1,20 +1,16 @@
 package main
 
-import (
-	"math/rand"
-	"time"
-)
+import "fmt"
 
 func main() {
-
+	nums := []int{3, 2, 3, 1, 2, 4, 5, 5, 6}
+	fmt.Println(findKthLargest(nums, 2))
 }
 
 //https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
 func findKthLargest(nums []int, k int) int {
-	rand.Seed(time.Now().UnixNano())
-	n := len(nums)
-	k = n - k
-	l, r := 0, n-1
+	k = len(nums) - k
+	l, r := 0, len(nums)-1
 	for l <= r {
 		p := partition(nums, l, r)
 		if p == k {
@@ -28,17 +24,11 @@ func findKthLargest(nums []int, k int) int {
 	return -1
 }
 
-// 随机选取标的点，即随机选择一个元素与nums[l]交换位置
-func randPivot(nums []int, l, r int) {
-	randIndex := rand.Int()%(r-l+1) + l
-	nums[randIndex], nums[l] = nums[l], nums[randIndex]
-}
-
 func partition(nums []int, l, r int) int {
-	randPivot(nums, l, r)
 	v := nums[l]
+	// <v和>v元素的分界点，初始值为l
 	j := l
-	for i := l + 1; i <= r; i++ {
+	for i := l; i <= r; i++ {
 		if nums[i] < v {
 			nums[i], nums[j+1] = nums[j+1], nums[i]
 			j++
