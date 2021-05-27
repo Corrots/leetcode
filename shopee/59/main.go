@@ -15,15 +15,15 @@ func generateMatrix(n int) [][]int {
 	for i := 0; i < n; i++ {
 		matrix[i] = make([]int, n)
 	}
-	var row, col, dirIndex int
+
+	var row, col, index int
 	for i := 1; i <= n*n; i++ {
 		matrix[row][col] = i
-		dir := dirs[dirIndex]
+		dir := dirs[index]
 		r, c := row+dir.x, col+dir.y
-		// 若下一步的位置超出矩阵边界，或者是之前访问过的位置，则顺时针旋转，进入下一个方向
 		if r < 0 || r >= n || c < 0 || c >= n || matrix[r][c] > 0 {
-			dirIndex = (dirIndex + 1) % 4
-			dir = dirs[dirIndex]
+			index = (index + 1) % 4
+			dir = dirs[index]
 		}
 		row += dir.x
 		col += dir.y
