@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package service.product;
+
+service Product {
+  rpc AddProduct(ProductInfo) returns (ResponseProduct) {}
+}
+
+message ProductInfo {
+  string name = 1;
+  string sku = 2;
+}
+
+message ResponseProduct {
+  int64 product_id = 1;
+  float price = 2;
+}
