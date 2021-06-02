@@ -5,7 +5,7 @@ func main() {
 }
 
 // 思路：双指针
-
+// 面试题 10.01. 合并排序的数组
 //https://leetcode-cn.com/problems/sorted-merge-lcci/
 func merge(A []int, m int, B []int, n int) {
 	p, q := m-1, n-1

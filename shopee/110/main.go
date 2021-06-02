@@ -5,12 +5,12 @@ func isBalanced(root *TreeNode) bool {
 	return height(root) != -1
 }
 
-func height(node *TreeNode) int {
-	if node == nil {
+func height(root *TreeNode) int {
+	if root == nil {
 		return 0
 	}
-	left := height(node.Left)
-	right := height(node.Right)
+	left := height(root.Left)
+	right := height(root.Right)
 	if left == -1 || right == -1 || abs(left-right) > 1 {
 		return -1
 	}
