@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package service.transfer;
+
+service Greeting {
+  rpc Hello(Request) returns (Response) {}
+}
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
