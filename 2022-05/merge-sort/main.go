@@ -7,7 +7,6 @@ import (
 	"github.com/corrots/leetcode/sort/helper"
 )
 
-// 自顶向下
 func main() {
 	nums1 := []int{10, 9, 8, 7, 6, 5, 4, 3, 2, 1}
 	MergeSort(nums1)
@@ -27,33 +26,31 @@ func MergeSort(nums []int) {
 	fmt.Printf("Merge sort: %d ms\n", time.Since(start).Milliseconds())
 }
 
+// 归并排序法
 // 递归使用归并排序对nums[l:r]范围的元素进行排序
 func mergeSort(nums []int, l, r int) {
 	if l >= r {
 		return
 	}
-	//if r-l <= 15 {
-	//	helper.InsertionSort(nums, l, r)
-	//	return
-	//}
-	mid := (l + r) / 2
+	mid := (r-l)/2 + l
+	// 分别对拆分的两个数组进行排序
 	mergeSort(nums, l, mid)
 	mergeSort(nums, mid+1, r)
-	if nums[mid] > nums[mid+1] {
+	if nums[mid] >= nums[mid+1] {
 		merge(nums, l, mid, r)
 	}
 }
 
 // 将nums[l:mid]和nums[mid+1:r]进行归并
 func merge(nums []int, l, mid, r int) {
-	aux := make([]int, (r-l)+1)
+	// 分配额外的空间来存储需要归并到一起的2个数组
+	aux := make([]int, r-l+1)
 	for i := l; i <= r; i++ {
 		aux[i-l] = nums[i]
 	}
-	// i, j分别位于左右数组的起始位置
+	// 定义两个数组的初始位置
 	i, j := l, mid+1
 	for k := l; k <= r; k++ {
-		// 避免i/j越界
 		if i > mid {
 			nums[k] = aux[j-l]
 			j++
@@ -68,5 +65,4 @@ func merge(nums []int, l, mid, r int) {
 			j++
 		}
 	}
-
 }
