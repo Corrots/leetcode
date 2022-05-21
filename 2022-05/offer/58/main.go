@@ -1,18 +1,25 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	nums := []int{1, 2, 3, 4, 5, 6, 7}
-	rotate(nums, 3)
-	fmt.Println(nums)
+	s := "the sky is blue"
+	fmt.Println(reverseWords(s))
+	fmt.Println(reverseWords("a good   example"))
 }
 
-func rotate(nums []int, k int) {
-	n := len(nums)
-	newNums := make([]int, n)
-	for i, val := range nums {
-		newNums[(i+k)%n] = val
+// https://leetcode.cn/problems/fan-zhuan-dan-ci-shun-xu-lcof/
+// 剑指 Offer 58 - I. 翻转单词顺序
+func reverseWords(s string) string {
+	slice := strings.Split(strings.Trim(s, " "), " ")
+	var res []string
+	for i := len(slice) - 1; i >= 0; i-- {
+		if slice[i] != "" {
+			res = append(res, slice[i])
+		}
 	}
-	copy(nums, newNums)
+	return strings.Join(res, " ")
 }
